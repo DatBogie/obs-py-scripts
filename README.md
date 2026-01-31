@@ -2,6 +2,8 @@
 
 Hello! These are some python script(s) I've written for OBS Virtual Camera.
 
+<img src="./.web/default.py.GIF" width="430" alt="Recording of default.py">
+
 > [!Important]
 > Ensure the WebSocket Server in OBS Studio is enabled.  
 > To do so, go to `Tools > WebSocket Server Settings` (in the menu bar), check `Enable WebSocket Server`, and `Enable Authentication`.
