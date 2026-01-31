@@ -6,6 +6,16 @@ Hello! These are some python script(s) I've written for OBS Virtual Camera.
 > Ensure the WebSocket Server in OBS Studio is enabled.  
 > To do so, go to `Tools > WebSocket Server Settings` (in the menu bar), check `Enable WebSocket Server`, and `Enable Authentication`.
 
+&nbsp;
+
+> [!Note]
+> On Linux, the OBS Virtual Camera likely will not work without external help.  
+> On Arch, install [`obs-cmd` from the AUR](https://aur.archlinux.org/packages/obs-cmd) (or from the [GitHub releases](https://github.com/grigio/obs-cmd/releases/latest)) and use this script:
+>
+> ```sh
+> obs-cmd -w "obsws://$(uname -n):<WebSocket_Port>/<WebSocket_Password>" virtual-camera start
+> ```
+
 ## Usage
 
 1. Clone this repo: ```git clone https://github.com/DatBogie/obs-py-scripts.git```
