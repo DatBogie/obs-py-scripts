@@ -52,7 +52,7 @@ Hello! These are some python script(s) I've written for OBS Virtual Camera.
   1. Create a scene called "Virtual Camera".
   2. Create two image sources: "Bunnies", and "Bird".
   3. Set the "Bird" source to any image you'd like and position it where you'd like. It will float around.
-  4. Any images in `obs-py-scripts/random_images` will randomly flash in and fade out on-screen. Ensure there is at least one image in the `random_images` folder, and no invalid files.
+  4. Any images in `obs-py-scripts/random_images` will randomly flash in and fade out on-screen. Ensure there is at least one image in the `random_images` folder, and no non-image files.
 
   #### Settings
 
