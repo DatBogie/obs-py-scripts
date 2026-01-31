@@ -2,6 +2,10 @@
 
 Hello! These are some python script(s) I've written for OBS Virtual Camera.
 
+> [!Important]
+> Ensure the WebSocket Server in OBS Studio is enabled.  
+> To do so, go to `Tools > WebSocket Server Settings` (in the menu bar), check `Enable WebSocket Server`, and `Enable Authentication`.
+
 ## Usage
 
 1. Clone this repo: ```git clone https://github.com/DatBogie/obs-py-scripts.git```
@@ -13,6 +17,8 @@ Hello! These are some python script(s) I've written for OBS Virtual Camera.
     OBS_PORT=<YOUR_PORT | 4455>
     OBS_PASSWORD="<YOUR_WebSocket_SERVER_PASSWORD>"
     ```
+
+    (To get your WebSocket Server password, go to `Tools > WebSocket Server Settings` and click `Show Connect Info`. You'll see your `Server Port` there too!)
 
 4. Setup `.venv` (Windows may use `python` or `py` instead of `python3`, depending on how you installed it):
 
