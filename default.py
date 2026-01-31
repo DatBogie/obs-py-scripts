@@ -10,10 +10,30 @@ cl = obs.ReqClient(host=os.environ.get("OBS_HOST"),port=int(os.environ.get("OBS_
 IMAGES_DIR = "./random_images"
 IMAGES = []
 
+class tick_cond():
+    def __init__(self,func:function,cond:function,callback:function):
+        self.f = func
+        self.c = cond
+        self.r = callback
+    def tick(self):
+        if not self.a: return
+        if self.c():
+            self.f()
+        else:
+            self.a = False
+            self.r()
+    def f():pass
+    def c():return False
+    def r():pass
+    a=True
+
+run_fade = None
+
 for f in os.listdir(IMAGES_DIR):
     IMAGES.append(os.fspath(Path(os.path.join(IMAGES_DIR,f)).absolute()))
 
 def show_random():
+    global run_fade
     cl.set_source_filter_settings("Bunnies","Color Correction",{"opacity":1},overlay=True)
     val = 0
     x = 0
@@ -26,13 +46,20 @@ def show_random():
         "positionY": 800/2 - 850/2
     })
     st = time_ns()/1e6
-    while val < 1:
+    def tick():
+        nonlocal st,val,x
         if time_ns()/1e6 - st >= 15:
             st = time_ns()/1e6
             x+=.01
             val = pytweening.easeOutSine(x)
             cl.set_source_filter_settings("Bunnies","Color Correction",{"opacity":1-val},overlay=True)
-    cl.set_source_filter_settings("Bunnies","Color Correction",{"opacity":0},overlay=True)
+    def cond():
+        return val < 1
+    def callback():
+        global run_fade
+        cl.set_source_filter_settings("Bunnies","Color Correction",{"opacity":0},overlay=True)
+        run_fade = None
+    run_fade = tick_cond(tick,cond,callback)
 
 orig_settings = termios.tcgetattr(sys.stdin)
 tty.setcbreak(sys.stdin)
@@ -59,6 +86,7 @@ while not x:
         st = time()
         if randrange(1,int(os.environ.get("OBS_SCRIPT_DEFAULT_RANDOM_CHANCE_IN"))+1) == 1:
             show_random()
+    if run_fade: run_fade.tick()
     cl.set_scene_item_transform("Virtual Camera",bird_id,{
         "positionX": bird_pos.x + math.sin(time())*20,
         "positionY": bird_pos.y + math.cos(time())*20,
