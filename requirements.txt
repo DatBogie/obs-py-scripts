@@ -1,1 +1,3 @@
-obspython
+obsws_python
+pytweening
+python-dotenv
