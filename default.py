@@ -57,7 +57,7 @@ bird_pos = vec2(bird_pos)
 while not x:
     if time() - st >= float(os.environ.get("OBS_SCRIPT_DEFAULT_DELAY")):
         st = time()
-        if randrange(1,float(os.environ.get("OBS_SCRIPT_DEFAULT_RANDOM_CHANCE_IN"))+1) == 1:
+        if randrange(1,int(os.environ.get("OBS_SCRIPT_DEFAULT_RANDOM_CHANCE_IN"))+1) == 1:
             show_random()
     cl.set_scene_item_transform("Virtual Camera",bird_id,{
         "positionX": bird_pos.x + math.sin(time())*20,
