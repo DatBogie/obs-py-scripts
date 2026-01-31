@@ -5,7 +5,7 @@ from pathlib import Path
 from random import randrange, choice
 from dotenv import load_dotenv
 load_dotenv()
-cl = obs.ReqClient(host=os.environ.get("OBS_HOST"),port=os.environ.get("OBS_PORT"),password=os.environ.get("OBS_PASSWORD"))
+cl = obs.ReqClient(host=os.environ.get("OBS_HOST"),port=int(os.environ.get("OBS_PORT")),password=os.environ.get("OBS_PASSWORD"))
 
 IMAGES_DIR = "./random_images"
 IMAGES = []
@@ -55,9 +55,9 @@ bird_pos = cl.get_scene_item_transform("Virtual Camera",bird_id).scene_item_tran
 bird_pos = vec2(bird_pos)
 
 while not x:
-    if time() - st >= os.environ.get("OBS_SCRIPT_DEFAULT_DELAY"):
+    if time() - st >= float(os.environ.get("OBS_SCRIPT_DEFAULT_DELAY")):
         st = time()
-        if randrange(1,os.environ.get("OBS_SCRIPT_DEFAULT_RANDOM_CHANCE_IN")+1) == 1:
+        if randrange(1,float(os.environ.get("OBS_SCRIPT_DEFAULT_RANDOM_CHANCE_IN"))+1) == 1:
             show_random()
     cl.set_scene_item_transform("Virtual Camera",bird_id,{
         "positionX": bird_pos.x + math.sin(time())*20,
